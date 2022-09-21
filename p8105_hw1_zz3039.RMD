@@ -1,17 +1,23 @@
 ---
 title: "p8105_hw1_zz3039"
-author: "zz3039"
+author: "Zirui Zhang"
 date: "2022-09-21"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 ## Problem 1
-```{r chunk_Problem 1}
+```{r chunk_Problem 1, message=FALSE, warning=FALSE}
 library(palmerpenguins)
 library(tidyverse)
 data("penguins", package = "palmerpenguins")
 glimpse(penguins)
-P1_plot = ggplot(data = penguins, aes(x = bill_length_mm, y = flipper_length_mm))+
+P1_plot =
+  ggplot(
+    penguins, 
+    aes(x = bill_length_mm, y = flipper_length_mm))+
   geom_point(size = 0.5, color = "dark green")+
   labs(x = "Bill Length", y = "Flipper Length")
 P1_plot
@@ -19,9 +25,30 @@ ggsave(file = "Scatterplot.png", plot = P1_plot)
 ```
 
 
+## Problem 2
 
-```{r chunk_Problem 2}
+### Create a data frame
+```{r chunk_Problem 2, message=FALSE, warning=FALSE}
+library(tibble)
+P2_df =
+  tibble(
+    a = rnorm(10),
+    logical = a > 0,
+    z = "Star&Sheep",
+    b = factor(c(0, 0.5, 1, 0, 0.5, 1,0, 0.5, 1, 0)))
+P2_df
+mean(pull(P2_df, a))
+mean(pull(P2_df, logical))
+mean(pull(P2_df, z))
+mean(pull(P2_df, b))
+```
 
+### Convert variables
+```{r chunk_P2, eval = FALSE}
+as.numeric(pull(P2_df, logical))
+as.numeric(pull(P2_df, z))
+as.numeric(pull(P2_df, b))
+# What happens, and why? Does this help explain what happens when you try to take the mean?
 ```
 
 
