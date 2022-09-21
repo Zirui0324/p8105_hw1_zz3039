@@ -14,6 +14,18 @@ library(palmerpenguins)
 library(tidyverse)
 data("penguins", package = "palmerpenguins")
 glimpse(penguins)
+# the data in this dataset, including values of important variables;the mean flipper length
+```
+
+* The names of the variables in "penguins" are:
+`r names(penguins)`.
+
+* The dataset "penguins" has `r nrow(penguins)` rows and `r ncol(penguins)` colums.
+
+* The mean flipper lenghth of "penguins" is `r mean(penguins$flipper_length_mm)`.
+
+
+```{r chunk_ggplot, message=FALSE, warning=FALSE}
 P1_plot =
   ggplot(
     penguins, 
@@ -48,7 +60,6 @@ mean(pull(P2_df, b))
 as.numeric(pull(P2_df, logical))
 as.numeric(pull(P2_df, z))
 as.numeric(pull(P2_df, b))
-# What happens, and why? Does this help explain what happens when you try to take the mean?
 ```
-
+Logical and factor vectors can be converted to numeric vectors while character vectors can not. This helps explain that it works when taking the mean of the logical vectors as they were returned as 0 and 1; for factor vectors, they were returned as their underlying numeric representaion after been converted.
 

@@ -1533,6 +1533,14 @@ glimpse(penguins)</code></pre>
 ## $ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …
 ## $ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male…
 ## $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…</code></pre>
+<pre class="r"><code># the data in this dataset, including values of important variables;the mean flipper length</code></pre>
+<ul>
+<li><p>The names of the variables in “penguins” are: species, island,
+bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex,
+year.</p></li>
+<li><p>The dataset “penguins” has 344 rows and 8 colums.</p></li>
+<li><p>The mean flipper lenghth of “penguins” is NA.</p></li>
+</ul>
 <pre class="r"><code>P1_plot =
   ggplot(
     penguins, 
@@ -1556,22 +1564,22 @@ P2_df =
     b = factor(c(0, 0.5, 1, 0, 0.5, 1,0, 0.5, 1, 0)))
 P2_df</code></pre>
 <pre><code>## # A tibble: 10 × 4
-##          a logical z          b    
-##      &lt;dbl&gt; &lt;lgl&gt;   &lt;chr&gt;      &lt;fct&gt;
-##  1 -1.20   FALSE   Star&amp;Sheep 0    
-##  2  0.585  TRUE    Star&amp;Sheep 0.5  
-##  3  0.883  TRUE    Star&amp;Sheep 1    
-##  4 -0.116  FALSE   Star&amp;Sheep 0    
-##  5 -0.0796 FALSE   Star&amp;Sheep 0.5  
-##  6 -0.923  FALSE   Star&amp;Sheep 1    
-##  7 -1.96   FALSE   Star&amp;Sheep 0    
-##  8 -1.15   FALSE   Star&amp;Sheep 0.5  
-##  9  1.26   TRUE    Star&amp;Sheep 1    
-## 10 -1.04   FALSE   Star&amp;Sheep 0</code></pre>
+##         a logical z          b    
+##     &lt;dbl&gt; &lt;lgl&gt;   &lt;chr&gt;      &lt;fct&gt;
+##  1 -0.459 FALSE   Star&amp;Sheep 0    
+##  2 -0.860 FALSE   Star&amp;Sheep 0.5  
+##  3 -0.148 FALSE   Star&amp;Sheep 1    
+##  4  0.717 TRUE    Star&amp;Sheep 0    
+##  5  0.759 TRUE    Star&amp;Sheep 0.5  
+##  6 -1.20  FALSE   Star&amp;Sheep 1    
+##  7  0.607 TRUE    Star&amp;Sheep 0    
+##  8  0.312 TRUE    Star&amp;Sheep 0.5  
+##  9 -0.568 FALSE   Star&amp;Sheep 1    
+## 10  0.116 TRUE    Star&amp;Sheep 0</code></pre>
 <pre class="r"><code>mean(pull(P2_df, a))</code></pre>
-<pre><code>## [1] -0.3734018</code></pre>
+<pre><code>## [1] -0.07235703</code></pre>
 <pre class="r"><code>mean(pull(P2_df, logical))</code></pre>
-<pre><code>## [1] 0.3</code></pre>
+<pre><code>## [1] 0.5</code></pre>
 <pre class="r"><code>mean(pull(P2_df, z))</code></pre>
 <pre><code>## [1] NA</code></pre>
 <pre class="r"><code>mean(pull(P2_df, b))</code></pre>
@@ -1581,8 +1589,12 @@ P2_df</code></pre>
 <h3>Convert variables</h3>
 <pre class="r"><code>as.numeric(pull(P2_df, logical))
 as.numeric(pull(P2_df, z))
-as.numeric(pull(P2_df, b))
-# What happens, and why? Does this help explain what happens when you try to take the mean?</code></pre>
+as.numeric(pull(P2_df, b))</code></pre>
+<p>Logical and factor vectors can be converted to numeric vectors while
+character vectors can not. This helps explain that it works when taking
+the mean of the logical vectors as they were returned as 0 and 1; for
+factor vectors, they were returned as their underlying numeric
+representaion after been converted.</p>
 </div>
 </div>
 
