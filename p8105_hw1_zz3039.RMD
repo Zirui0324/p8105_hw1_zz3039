@@ -13,26 +13,30 @@ output:
 library(palmerpenguins)
 library(tidyverse)
 data("penguins", package = "palmerpenguins")
-glimpse(penguins)
-skimr::skim(penguins)
-# the data in this dataset, including values of important variables
 ```
 
-* The names of the variables in "penguins" are:
-**`r names(penguins)`**.
+* The names of the variables in *penguins* are:
+*`r names(penguins)`*.
 
-* The dataset "penguins" has **`r nrow(penguins)`** rows and **`r ncol(penguins)`** colums.
+* The levels of each *factor variables* are:
 
-* The mean flipper lenghth of "penguins" is **`r mean(penguins$flipper_length_mm, na.rm = TRUE)`**.
+  *species:* `r levels(penguins$species)`;
 
+  *island:* `r levels(penguins$island)`;
+
+  *sex:* `r levels(penguins$sex)`.
+
+* The dataset *penguins* has **`r nrow(penguins)`** rows and **`r ncol(penguins)`** colums.
+
+* The *mean flipper length* of *penguins* is **`r mean(penguins$flipper_length_mm, na.rm = TRUE)`**.
+
+* This is a scatterplot of *flipper length* vs *bill length*:
 
 ```{r chunk_ggplot, message=FALSE, warning=FALSE}
 P1_plot =
   ggplot(
     penguins, 
-    aes(x = bill_length_mm, y = flipper_length_mm))+
-  geom_point(size = 0.5, color = "dark green")+
-  labs(x = "Bill Length", y = "Flipper Length")
+    aes(x = bill_length_mm, y = flipper_length_mm)) + geom_point(size = 0.5, color = "dark green") + labs(x = "Bill Length", y = "Flipper Length")
 P1_plot
 ggsave(file = "Scatterplot.png", plot = P1_plot)
 ```
@@ -47,20 +51,20 @@ P2_df =
   tibble(
     a = rnorm(10),
     logical = a > 0,
-    z = "Star&Sheep",
-    b = factor(c(0, 0.5, 1, 0, 0.5, 1,0, 0.5, 1, 0)))
+    b = "Star&Sheep",
+    c = factor(c(0, 0.5, 1, 0, 0.5, 1,0, 0.5, 1, 0)))
 P2_df
-mean(pull(P2_df, a))
-mean(pull(P2_df, logical))
-mean(pull(P2_df, z))
-mean(pull(P2_df, b))
+mean(pull(P2_df, a), na.rm = TRUE)
+mean(pull(P2_df, logical), na.rm = TRUE)
+mean(pull(P2_df, b), na.rm = TRUE)
+mean(pull(P2_df, c), na.rm = TRUE)
 ```
 
 ### Convert variables
-```{r chunk_P2, eval = FALSE}
+```{r chunk_P2, eval=FALSE}
 as.numeric(pull(P2_df, logical))
-as.numeric(pull(P2_df, z))
 as.numeric(pull(P2_df, b))
+as.numeric(pull(P2_df, c))
 ```
-Logical and factor vectors can be converted to numeric vectors while character vectors can not. This helps explain that it works when taking the mean of the logical vectors as they were returned as 0 and 1; for factor vectors, they were returned as their underlying numeric representaion after been converted.
+* Logical and factor vectors can be converted to numeric vectors while character vectors can not. This helps explain why it works when taking the mean of the logical vectors as they were returned as 0 and 1; for factor vectors, they were returned as their underlying numeric representaions after been converted.
 
