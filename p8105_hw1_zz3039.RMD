@@ -14,15 +14,16 @@ library(palmerpenguins)
 library(tidyverse)
 data("penguins", package = "palmerpenguins")
 glimpse(penguins)
-# the data in this dataset, including values of important variables;the mean flipper length
+skimr::skim(penguins)
+# the data in this dataset, including values of important variables
 ```
 
 * The names of the variables in "penguins" are:
-`r names(penguins)`.
+**`r names(penguins)`**.
 
-* The dataset "penguins" has `r nrow(penguins)` rows and `r ncol(penguins)` colums.
+* The dataset "penguins" has **`r nrow(penguins)`** rows and **`r ncol(penguins)`** colums.
 
-* The mean flipper lenghth of "penguins" is `r mean(penguins$flipper_length_mm)`.
+* The mean flipper lenghth of "penguins" is **`r mean(penguins$flipper_length_mm, na.rm = TRUE)`**.
 
 
 ```{r chunk_ggplot, message=FALSE, warning=FALSE}
